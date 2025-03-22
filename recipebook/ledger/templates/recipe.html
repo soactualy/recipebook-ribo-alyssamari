@@ -7,6 +7,19 @@
 </head>
 <body>
     <header>Recipe Book</header>
+    {% if user.is_authenticated %}
+        <form method="post", action="{% url 'logout' %}">
+            {% csrf_token %}
+            {{form.as_p}}
+            <button type="submit">logout</button>
+        </form>
+    {% else %}
+        <form action="{% url 'login' %}">
+            {% csrf_token %}
+            {{form.as_p}}
+            <button type="submit">login</button>
+        </form>
+        {% endif %}
     {% block content %}{% endblock %}
 </body>
 </html>

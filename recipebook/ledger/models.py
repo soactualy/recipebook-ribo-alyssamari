@@ -1,6 +1,7 @@
 from datetime import datetime
 from django.db import models
 from django.urls import reverse
+from users.models import Profile
 
 # Create your models here.
 class Ingredient(models.Model):
@@ -16,8 +17,12 @@ class Ingredient(models.Model):
         verbose_name = 'ingredient'
         verbose_name_plural = 'ingredients'
 
+
 class Recipe(models.Model):
     name = models.CharField(max_length=100)
+    author = models.ForeignKey(Profile, null=True, on_delete=models.SET_NULL)
+    created_on = models.DateTimeField(auto_now_add=True)
+    updated_on = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return f'{self.name}'
