@@ -5,10 +5,12 @@
 {% block content %}
     <h1>Recipe Detail</h1>
     <h2>{{ recipe.name }}</h2>
+    <h2>{{recipe.recipe_image}}</h2>
     <h4>{{ recipe.author }}</h4>
     <ul>
         {% for ingredient in recipe.ingredients.all %}
             <li>{{ ingredient.quantity }} {{ ingredient.ingredient.name }} </li>
             {% endfor %}
     </ul>
+    <form action="POST" enctype="multipart/form-data"></form>
     {% endblock %}

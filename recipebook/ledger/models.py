@@ -12,7 +12,7 @@ class Ingredient(models.Model):
     
     def get_absolute_url(self):
         return reverse('ledger:ingredient', args=[str(self.pk)])
-
+    
     class Meta:
         verbose_name = 'ingredient'
         verbose_name_plural = 'ingredients'
@@ -34,6 +34,7 @@ class Recipe(models.Model):
         verbose_name = 'recipe'
         verbose_name_plural ='recipes'
 
+
 class RecipeIngredient(models.Model):
     quantity = models.IntegerField()
     ingredient = models.ForeignKey(
@@ -54,3 +55,13 @@ class RecipeIngredient(models.Model):
         verbose_name = 'recipe_ingredient'
         verbose_name_plural = 'recipe_ingredients'
     
+class RecipeImage(models.Model):
+    recipe_image = models.ImageField(upload_to='images/', null=False)
+    description = models.CharField(max_length=255)
+
+    image = models.ForeignKey(
+        Recipe,
+        on_delete=models.CASCADE,
+        null=False,
+        related_name='images'
+    )
